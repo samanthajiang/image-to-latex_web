@@ -1,14 +1,34 @@
-# React.js landing page template v2
+# Image-to-Latex Web application from scratch
 
 ## <a href="https://react-landing-page-template-2021.vercel.app/"> LIVE DEMO</a>
 
-<img src="public/assets/gifs/demo.gif" width="100%" height="auto" />
+<img src="public/assets/images/demo.png" width="100%" height="auto" />
 
 ### Description
 
-This is a React.js/Next.js based landing page plug-n-play template, ideal for startups/companies/service providers wanting to showcase their vision in a single page sleek and modern landing page.
+The goal of this project is to show you how to Image-to-Latex Web application by your own OCR model from scratch
 
-### Features
+### Step1. Training a image-to-latex OCR using machine learning
+
+Latex formulas are trained on the base [**LaTeX-OCR**](https://github.com/lukas-blecher/LaTeX-OCR) model. I add additional data to improve the model's ability to recognize LaTeX expressions, especially for Matrix and Align. 
+
+### Step2. Create a frontend web page 
+
+This project use [**react-landing-page-template-2021**](https://github.com/samanthajiang/react-landing-page-template-2021) 
+as the base template. See deploy instruction in the original repository.
+
+### Step3. Create a backend api
+
+How to show prediction result on the webpage? [**Flask**](https://github.com/pallets/flask) serves as api to connect frontend and backend. See `backend/pix2tex/api/app.py` and `src/components/Upload_image.tsx` to see how frontend and backend communicate.
+
+### Step4. Deploy on the web
+
+### Step5. SEO
+
+### Step6. GoogleAd
+
+This project use [**react-landing-page-template-2021**](https://github.com/samanthajiang/react-landing-page-template-2021) 
+as the base template. See deploy instruction in the original repository.
 
 - 📱  Responsive design
 - 🔥 [Next.js](https://nextjs.org) for Static Site Generator
