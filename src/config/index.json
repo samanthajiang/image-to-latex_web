@@ -5,30 +5,23 @@
   },
   "navigation": [
     {
-      "name": "Product",
+      "name": "Image to Latex",
       "href": "product"
     },
     {
-      "name": "Features",
-      "href": "features"
-    },
-
-    {
-      "name": "Pricing",
-      "href": "pricing"
-    },
-    {
-      "name": "About",
-      "href": "about"
+      "name": "Contact",
+      "href": "contact"
     }
+
+
   ],
   "callToAction": {
     "text": "Get started",
     "href": "#"
   },
   "mainHero": {
-    "title": "Use me as your",
-    "subtitle": "landing page.",
+    "title": "Free Online Image to LaTeX Converter\n",
+    "subtitle": "",
     "description": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
     "img": "/assets/images/happyTeam.jpeg",
     "primaryAction": {
@@ -41,17 +34,22 @@
     }
   },
   "product": {
-    "title": "React landing page 2021",
+    "title": "Free Online Image to LaTeX Converter\n",
     "items": [
       {
         "title": "A plug n play template",
-        "description": "Just edit the config.json file with details about your company and voila your beautiful state of the art landing page is ready to go live! Remember to also update your assets, add any images you want to show to /assets/images and link them in the config.json",
+        "description": "Convert image to Latex with incredible accuracy powered by AI",
         "img": "/assets/images/product1.jpg"
-      },
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact form\n",
+    "items": [
       {
-        "title": "Make it your own!",
-        "description": "Play around with the theme.ts file and configure the color palette to match the branding of your company! If you're feeling wild, maybe change some tailwind css as well!",
-        "img": "/assets/images/product2.jpg"
+        "title": "A plug n play template",
+        "description": "Convert image to Latex with incredible accuracy powered by AI",
+        "img": "/assets/images/product1.jpg"
       }
     ]
   },
