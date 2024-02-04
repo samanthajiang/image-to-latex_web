@@ -7,3 +7,5 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
 );
 
 export default MyApp;
+
+// Next.js uses the App component to initialize pages. You can override it and control the page initialization and:
