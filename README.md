@@ -1,6 +1,6 @@
 # Image-to-Latex Web application from scratch
 
-## <a href="https://react-landing-page-template-2021.vercel.app/"> LIVE DEMO</a>
+## Page DEMO
 
 <img src="public/assets/images/demo.png" width="100%" height="auto" />
 
@@ -8,16 +8,16 @@
 
 The goal of this project is to show you how to Image-to-Latex Web application by your own OCR model from scratch
 
-### Step1. Training a image-to-latex OCR using machine learning
+### Step1. Training image-to-latex OCR machine learning model
 
 Latex formulas are trained on the base [**LaTeX-OCR**](https://github.com/lukas-blecher/LaTeX-OCR) model. I add additional data to improve the model's ability to recognize LaTeX expressions, especially for Matrix and Align. 
 
-### Step2. Create a frontend web page 
+### Step2. Create frontend web page 
 
 This project use [**react-landing-page-template-2021**](https://github.com/samanthajiang/react-landing-page-template-2021) 
 as the base template. See deploy instruction in the original repository.
 
-### Step3. Create a backend api
+### Step3. Create backend api
 
 How to show prediction result on the webpage? [**Flask**](https://github.com/pallets/flask) serves as api to connect frontend and backend. See `backend/pix2tex/api/app.py` and `src/components/Upload_image.tsx` to see how frontend and backend communicate.
 
