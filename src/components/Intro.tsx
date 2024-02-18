@@ -5,32 +5,31 @@ const Introduction = () => {
     <section className={`bg-red-50 ...`}>
       <div className="lg:text-center">
         <div className="mx-auto px-2 py-2 sm:px-6 lg:px-8 items-center">
-          {/* <p */}
-          {/*  className={`mt-2 max-w-3xl text-2xl text-neutral-900 lg:mx-auto text-neutral-800`} */}
-          {/* > */}
-          {/*  Convert image to Latex with incredible accuracy powered by AI */}
-
-          {/*  </p> */}
-
-          {/* <></>flex flex-row justify-between items-stretch w-1/2 mx-auto */}
           <div className=" container flex justify-around mx-auto items-start w-2/3">
             <div className=" w-1/2 flex flex-col justify-center items-center mx-auto">
-              <p className={`mt-2 text-xl font-semibold`}>
+              <h3 className={`mt-2 text-xl font-semibold`}>
                 Simple & Complex Latex
-              </p>
+              </h3>
 
               {/* eslint-disable-next-line jsx-a11y/alt-text */}
               <img
                 className="w-3/4 px-2 pb-2 pt-4 "
-                src="/assets/images/1.jpg"
+                src="/assets/images/Latex_equation_image.jpg"
+                alt="Latex Mathematical Equations"
               />
             </div>
 
             <div className=" w-1/2 flex flex-col justify-center items-center mx-auto">
-              <p className={`mt-2 text-xl font-semibold`}>Predicted Formula </p>
+              <h3 className={`mt-2 text-xl font-semibold`}>
+                Predicted Formula{' '}
+              </h3>
 
               {/* eslint-disable-next-line jsx-a11y/alt-text */}
-              <img className=" p-2 " src="/assets/images/2.jpg" />
+              <img
+                className=" p-2 "
+                src="/assets/images/Latex_math_formula.jpg"
+                alt="LaTeX math formula"
+              />
             </div>
           </div>
           <p
