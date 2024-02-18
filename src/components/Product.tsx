@@ -22,7 +22,8 @@ const Product = () => {
           <h2
             className={`mt-4 max-w-3xl text-2xl text-neutral-900 lg:mx-auto text-neutral-800`}
           >
-            Convert image of Latex Math Equations to Editable Formula powered by AI
+            Convert image of Latex Math Equations to Editable Formula powered by
+            AI
           </h2>
         </div>
       </div>
