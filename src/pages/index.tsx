@@ -14,9 +14,7 @@ const App = () => {
   return (
     <div className={`bg-background grid gap-y-16 overflow-hidden`}>
       <Head>
-        <title>
-          Free Online Image to LaTeX Converter
-        </title>
+        <title>Free Online Image to LaTeX Converter</title>
         <meta
           name="description"
           content="Convert images of LaTeX Math Equations / Matrices online for free with AI powered Latex-OCR. Edit LaTeX formula in-app and paste the result directly into your document."
