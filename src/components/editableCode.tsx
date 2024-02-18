@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // import Prism from 'prismjs';
-import { highlight, languages } from 'prismjs';
+import { highlight, languages, Grammar } from 'prismjs';
 import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
 import Editor from 'react-simple-code-editor';
@@ -25,7 +25,9 @@ function EditableCode({ value }: any) {
         padding={10}
         onValueChange={(code) => setCode(code)}
         // highlight={code => highlight(code, languages['js'], 'javascript')}
-        highlight={(code) => highlight(code, languages.latex, 'latex')}
+        highlight={(code) =>
+          highlight(code, languages.latex as Grammar, 'latex')
+        }
         // highlight={code => makehighlight(code)}
         style={{
           fontFamily: 'monospace',
