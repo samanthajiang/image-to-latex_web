@@ -139,14 +139,14 @@ class LatexOCR:
             self.last_pic = img.copy()
         img = minmax_size(pad(img), self.args.max_dimensions, self.args.min_dimensions)
         if (self.image_resizer is not None and not self.args.no_resize) and resize:
-            print("===resize")
+            # print("===resize")
             with torch.no_grad():
                 input_image = img.convert('RGB').copy()
                 r, w, h = 1, input_image.size[0], input_image.size[1]
                 for _ in range(10):
                     h = int(h * r)  # height to resize
                     img = pad(minmax_size(input_image.resize((w, h), Image.Resampling.BILINEAR if r > 1 else Image.Resampling.LANCZOS), self.args.max_dimensions, self.args.min_dimensions))
-                    print("img_resizer_or",img.size)
+                    # print("img_resizer_or",img.size)
                     t = test_transform(image=np.array(img.convert('RGB')))['image'][:1].unsqueeze(0)
                     w = (self.image_resizer(t.to(self.args.device)).argmax(-1).item()+1)*32
                     logging.info(r, img.size, (w, int(input_image.size[1]*r)))
@@ -304,18 +304,18 @@ class LatexOCR_my:
         # todo
         self.args.checkpoint = 'checkpoints/weights_176.pth'
         self.model.load_state_dict(torch.load(self.args.checkpoint, map_location=self.args.device))
-        print("===self.model.load_state_dict",self.args.checkpoint)
+        # print("===self.model.load_state_dict",self.args.checkpoint)
         self.model.eval()
 
         if 'image_resizer.pth' in os.listdir(os.path.dirname(self.args.checkpoint)) and not arguments.no_resize:
-            print("===self.image_resizer")
+            # print("===self.image_resizer")
             self.image_resizer = ResNetV2(layers=[2, 3, 3], num_classes=max(self.args.max_dimensions)//32, global_pool='avg', in_chans=1, drop_rate=.05,
                                           preact=True, stem_type='same', conv_layer=StdConv2dSame).to(self.args.device)
             self.image_resizer.load_state_dict(torch.load(os.path.join(os.path.dirname(self.args.checkpoint), 'image_resizer.pth'), map_location=self.args.device))
             self.image_resizer.eval()
         # todo
         self.args.tokenizer = 'dataset/tokenizer_my.json'
-        print("self.args.tokenizer",self.args.tokenizer)
+        # print("self.args.tokenizer",self.args.tokenizer)
         self.tokenizer = PreTrainedTokenizerFast(tokenizer_file=self.args.tokenizer)
 
     @in_model_path()
@@ -347,7 +347,7 @@ class LatexOCR_my:
         # todo
         # resize = False
         if (self.image_resizer is not None and not self.args.no_resize) and resize:
-            print("===do_resize")
+            # print("===do_resize")
             with torch.no_grad():
                 input_image = img.convert('RGB').copy()
                 r, w, h = 1, input_image.size[0], input_image.size[1]
@@ -355,7 +355,7 @@ class LatexOCR_my:
                 for _ in range(10):
                     h = int(h * r)  # height to resize
                     img = pad(minmax_size(input_image.resize((w, h), Image.Resampling.BILINEAR if r > 1 else Image.Resampling.LANCZOS), self.args.max_dimensions, self.args.min_dimensions))
-                    print("===img_resizer_my",img.size)
+                    # print("===img_resizer_my",img.size)
                     # img.show()
                     t = test_transform(image=np.array(img.convert('RGB')))['image'][:1].unsqueeze(0)
                     w = (self.image_resizer(t.to(self.args.device)).argmax(-1).item()+1)*32
@@ -411,9 +411,9 @@ class LatexOCR_my_non_resize:
         self.model = get_model(self.args)
         # todo
         self.args.checkpoint = 'checkpoints/weights_176.pth'
-        print("self.args.checkpoint",self.args.checkpoint)
+        # print("self.args.checkpoint",self.args.checkpoint)
         self.model.load_state_dict(torch.load(self.args.checkpoint, map_location=self.args.device))
-        print("===self.model.load_state_dict",self.args.checkpoint)
+        # print("===self.model.load_state_dict",self.args.checkpoint)
         self.model.eval()
 
         # if 'image_resizer.pth' in os.listdir(os.path.dirname(self.args.checkpoint)) and not arguments.no_resize:
@@ -424,7 +424,7 @@ class LatexOCR_my_non_resize:
         #     self.image_resizer.eval()
         # todo
         self.args.tokenizer = 'dataset/tokenizer_my.json'
-        print("self.args.tokenizer",self.args.tokenizer)
+        # print("self.args.tokenizer",self.args.tokenizer)
         self.tokenizer = PreTrainedTokenizerFast(tokenizer_file=self.args.tokenizer)
 
     @in_model_path()
@@ -450,17 +450,17 @@ class LatexOCR_my_non_resize:
             self.last_pic = img.copy()
         # todo
         img = pad_my(img)
-        print("img",img.size)
+        # print("img",img.size)
         # # todo
         # img = minmax_size(img, self.args.max_dimensions, self.args.min_dimensions)
         # todo
         resize = False
         if (self.image_resizer is not None and not self.args.no_resize) and resize:
-            print("===do_resize")
+            # print("===do_resize")
             with torch.no_grad():
                 input_image = img.convert('RGB').copy()
                 r, w, h = 1, input_image.size[0], input_image.size[1]
-                print("input_image.size[0], input_image.size[1]",input_image.size[0], input_image.size[1])
+                # print("input_image.size[0], input_image.size[1]",input_image.size[0], input_image.size[1])
                 for _ in range(10):
                     h = int(h * r)  # height to resize
                     img = pad_my(minmax_size(input_image.resize((w, h), Image.Resampling.BILINEAR if r > 1 else Image.Resampling.LANCZOS), self.args.max_dimensions, self.args.min_dimensions))
@@ -507,7 +507,7 @@ def output_prediction(pred, args):
         if formatter_name:
             formatter = get_formatter_by_name(formatter_name)
             lexer = get_lexer_by_name('tex')
-            print(highlight(pred, lexer, formatter), end='')
+            # print(highlight(pred, lexer, formatter), end='')
     except ImportError:
         TERM = 'dumb'
     if TERM == 'dumb':

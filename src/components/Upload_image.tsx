@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
-import LoadingButton from '@mui/lab/LoadingButton';
 import { styled } from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
 import axios from 'axios';
+
 import EditableCode from './editableCode';
 import LoadingSpinner from './Spinner';
 import 'katex/dist/katex.min.css';
@@ -23,12 +24,13 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 const Image = () => {
-  const [imageSrc, setImageSrc] = useState(null);
+  const [imageSrc, setImageSrc] = useState('');
   const [imgName, setImgName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = React.useState(false);
+  const modelState = useRef(false);
   function handleClick() {
-    setImageSrc(null);
+    setImageSrc('');
     setImgName('');
     setLoading(false);
   }
@@ -43,16 +45,31 @@ const Image = () => {
       setIsLoading(true);
       const formData = new FormData();
       formData.append('imageFile', imageSrc);
+      if (modelState.current) {
+        const response = await axios.post(
+          'http://127.0.0.1:8001/predict_old/',
+          formData,
+          requestConfig
+        );
+        setIsLoading(false);
+        setImgName(response.data.prediction);
+        setLoading(false);
+      } else {
+        const response = await axios.post(
+          'http://127.0.0.1:8001/predict/',
+          formData,
+          requestConfig
+        );
+        setIsLoading(false);
+        setImgName(response.data.prediction);
+        setLoading(false);
+      }
 
-      const response = await axios.post(
-        'http://127.0.0.1:8001/predict/',
-        formData,
-        requestConfig
-      );
-
-      setIsLoading(false);
-      setImgName(response.data.prediction);
-      setLoading(false);
+      // const response = await axios.post(
+      //   'http://127.0.0.1:8001/predict/',
+      //   formData,
+      //   requestConfig
+      // );
     } catch (error) {
       setLoading(false);
       setIsLoading(false);
@@ -67,9 +84,15 @@ const Image = () => {
     if (selectedFile && selectedFile.type.startsWith('image/')) {
       setImageSrc(selectedFile);
     } else {
+      // eslint-disable-next-line no-alert
       alert('Please select a valid image file.');
-      setImageSrc(null);
+      setImageSrc('');
     }
+  };
+
+  const modelChange = () => {
+    modelState.current = !modelState.current;
+    check();
   };
 
   return (
@@ -80,9 +103,9 @@ const Image = () => {
             type="file"
             id="fileElem"
             accept="image/*"
-            onChange={(e) => {
-              this.handleFiles(e.target.files);
-            }}
+            // onChange={(e) => {
+            //   this.handleFiles(e.target.files);
+            // }}
           />
           {/* <label className="upload-label " htmlFor="fileElem"> */}
           {/*  <div className="upload-text ">Drag Image here or click to upload</div> */}
@@ -140,16 +163,17 @@ const Image = () => {
 
       <div className="convert flex flex-row items-center...">
         <div>
-          <LoadingButton
-            // className="py-2.5 px-8 me-5 mb-5 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-600 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-            className="py-2.5 px-8 me-5 mb-5  flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-background bg-primary hover:bg-red-200 hover:border-transparent hover:text-gray-900 md:py-4 md:text-lg md:px-10 dark:hover:text-white"
+          <button
+            disabled={loading}
+            className="w-42 h-18.5 me-5 mb-5 flex items-center justify-center border border-transparent text-base font-medium rounded-md text-background bg-primary hover:bg-red-200 hover:border-transparent hover:text-gray-900 md:py-4 md:text-lg md:px-10 dark:hover:text-white"
             onClick={() => check()}
-            loading={loading}
-            loadingIndicator="Converting…"
-            variant="outlined"
           >
-            <span>Convert</span>
-          </LoadingButton>
+            {loading ? (
+              <span>LOADING...</span>
+            ) : (
+              <span style={{ whiteSpace: 'nowrap' }}>CONVERT</span>
+            )}
+          </button>
         </div>
         <div>
           <p
@@ -158,14 +182,17 @@ const Image = () => {
             }
           >
             Unhappy about the result? Try{' '}
-            <span className="text-primary">CONVERT</span> Again{' '}
+            <span className="text-primary">CONVERT</span> Again or{' '}
+            <span className="text-primary">SWITCH</span> model{'     '}
+            <Switch onChange={() => modelChange()} />
           </p>
         </div>
       </div>
 
       <div className="prediction">
         <h3 className="py-1 pl-4 text-xl text-gray-500 lg:mx-auto text-gray-600">
-          Edit the Generated Latex formula For Better Result
+          <span className="text-primary">EDIT</span> the Generated Latex formula
+          For Better Result
         </h3>
         {isLoading ? (
           <LoadingSpinner />

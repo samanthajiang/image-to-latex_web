@@ -56,14 +56,22 @@ def hello():
 def getImage():
     if request.method == "POST":
         file = request.files['imageFile']
+        # model_name = request.files['model_version']
         image = Image.open(file)
         # print("image",image)
         global model
-        if model is None:
+        model = LatexOCR_my_non_resize()
+        # print("======LatexOCR_my_non_resize()")
             # print("LatexOCR()")
-            model = LatexOCR_my_non_resize()
+            # if model_name == 'new_model':
+            #     print("LatexOCR_my_non_resize()")
+            #     model = LatexOCR_my_non_resize()
+            # else:
+            #     model = LatexOCR()
+            #     print("LatexOCR")
+
         result = model(image)
-        print("=== result_0", result)
+        # print("=== result_0", result)
         result = result.replace("\\noalign{\smallskip}", "")
         result = result.replace("\mbox", "\ \\text")
         i = result.find("\ \\text{")
@@ -72,7 +80,38 @@ def getImage():
                 if result[j] =='}':
                     result = result[:j] + '\ ' + result[j:]
                     break
-        print("=== result", result)
+        # print("=== result", result)
+        return jsonify({'prediction': result})
+
+@app.route('/predict_old/', methods=['POST'])
+def getImage_old():
+    if request.method == "POST":
+        file = request.files['imageFile']
+        # model_name = request.files['model_version']
+        image = Image.open(file)
+        # print("image",image)
+        global model
+        model = LatexOCR()
+        # print("======LatexOCR()")
+            # print("LatexOCR()")
+            # if model_name == 'new_model':
+            #     print("LatexOCR_my_non_resize()")
+            #     model = LatexOCR_my_non_resize()
+            # else:
+            #     model = LatexOCR()
+            #     print("LatexOCR")
+
+        result = model(image)
+        # print("=== result_0", result)
+        result = result.replace("\\noalign{\smallskip}", "")
+        result = result.replace("\mbox", "\ \\text")
+        i = result.find("\ \\text{")
+        if i != -1:
+            for j in range(i,len(result)):
+                if result[j] =='}':
+                    result = result[:j] + '\ ' + result[j:]
+                    break
+        # print("=== result", result)
         return jsonify({'prediction': result})
 
 

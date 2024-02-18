@@ -1,9 +1,9 @@
 import React from 'react';
+
 import config from '../config/index.json';
 
 const Product = () => {
   const { product } = config;
-  const [firstItem, secondItem] = product.items;
 
   return (
     <section className={`bg-background py-8`} id="product">
@@ -22,18 +22,12 @@ const Product = () => {
         </h1>
         {/* <Divider /> */}
         <div className="lg:text-center">
-
-            <p
-              className={`mt-4 max-w-3xl text-2xl text-neutral-900 lg:mx-auto text-neutral-800`}
-            >
-              Convert image to Latex with incredible accuracy powered by AI
-            </p>
-
+          <p
+            className={`mt-4 max-w-3xl text-2xl text-neutral-900 lg:mx-auto text-neutral-800`}
+          >
+            Convert image to Latex with incredible accuracy powered by AI
+          </p>
         </div>
-
-
-
-
 
         {/* <div className={`flex flex-wrap flex-col-reverse sm:flex-row`}> */}
         {/*  <div className={`w-full sm:w-1/2 p-6`}> */}
@@ -55,9 +49,8 @@ const Product = () => {
         {/*  </div> */}
         {/* </div> */}
       </div>
-      {/*<div><ContactUs /></div>*/}
+      {/* <div><ContactUs /></div> */}
     </section>
-
   );
 };
 
