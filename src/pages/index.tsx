@@ -20,6 +20,10 @@ const App = () => {
           content="Convert images of LaTeX Math Equations / Matrices online for free with AI powered Latex-OCR. Edit LaTeX formula in-app and paste the result directly into your document."
           key="desc"
         />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
       </Head>
       <LazyShow>
         <>
