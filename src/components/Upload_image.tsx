@@ -47,7 +47,7 @@ const Image = () => {
       formData.append('imageFile', imageSrc);
       if (modelState.current) {
         const response = await axios.post(
-          'http://3.144.125.125:8001/predict_old/',
+          'https://127.0.0.1:8001/predict_old/',
           formData,
           requestConfig
         );
@@ -57,7 +57,7 @@ const Image = () => {
         setLoading(false);
       } else {
         const response = await axios.post(
-          'http://3.144.125.125:8001/predict/',
+          'https://127.0.0.1:8001/predict/',
           formData,
           requestConfig
         );
