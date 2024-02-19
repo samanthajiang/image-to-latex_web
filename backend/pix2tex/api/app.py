@@ -11,7 +11,7 @@ pd = os.path.dirname(os.getcwd())
 pd = os.path.dirname(pd)
 
 sys.path.append(pd)
-print("sys.path",sys.path)
+# print("sys.path",sys.path)
 from pix2tex.cli import LatexOCR,LatexOCR_my,LatexOCR_my_non_resize
 model = None
 app = Flask(__name__)
@@ -32,7 +32,7 @@ def root():
         'status-code': HTTPStatus.OK,
         'data': {},
     }
-    print('===root')
+    # print('===root')
     return response
 
 
